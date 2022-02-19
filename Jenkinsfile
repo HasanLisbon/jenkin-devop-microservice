@@ -5,6 +5,8 @@ pipeline {
 		dockerHome = tool "myDocker"
 		mavenHome = tool "myMaven"
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+        dockerTag = "shimul1402/currency-exchange-devops:$env.BUILD_ID"
+        registryCredential = "dockerhub"
 
 	}
     stages {
@@ -40,14 +42,18 @@ pipeline {
             steps{
                 //'docker build -t shimul1402/currency-exchange-devops:$env.BUILD_TAG'
                 script{
-                    dockerImage = docker.build("shimul1402/currency-exchange-devops:${env.BUILD_ID}")
+                    dockerImage = docker.build dockerTag
                 }
             }
         }
         stage('Docker Image Push'){
             steps{
-                sh "docker login"
-                sh "docker push shimul1402/currency-exchange-devops:${env.BUILD_ID}"
+                script{
+                    docker.withRegistry("", registryCredential){
+                        dockerImage.push()
+                        dockerImage.push("latest")
+                    }
+                }
             }
           
         }
