@@ -5,11 +5,11 @@ pipeline {
         stage('Build') {
             steps {
                 // sh 'mvn --version'
-				echo 'BRANCH NAME - $env.BRANCH_NAME'
-				echo 'BUILD ID - $env.BUILD_ID'
-				echo 'BUILD NUMBER - $env.BUILD_NUMBER'
-				echo 'JOB NAME - $env.JOB_NAME'
-				echo 'BUILD TAG - $env.BUILD_TAG'
+				echo "BRANCH NAME - $env.BRANCH_NAME"
+				echo "BUILD ID - $env.BUILD_ID"
+				echo "BUILD NUMBER - $env.BUILD_NUMBER"
+				echo "JOB NAME - $env.JOB_NAME"
+				echo "BUILD TAG - $env.BUILD_TAG"
 
             }
         }
