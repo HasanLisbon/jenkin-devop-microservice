@@ -18,6 +18,16 @@ pipeline {
 
 		}
 	}
+	}post{
+		always{
+			echo "This script is run always"
+		}
+		success{
+			echo "This script is run when it is success"
+		}
+		failure{
+			echo "This script is run when it is failure"
+		}
 	}
 
 }
