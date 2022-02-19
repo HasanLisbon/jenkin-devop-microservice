@@ -46,13 +46,8 @@ pipeline {
         }
         stage('Docker Image Push'){
             steps{
-                script{
-                    docker.withRegistry('', 'dockerhub'){
-                    docker.push()
-                    docker.push('latest')
-                    }
-
-                }
+                sh "docker login"
+                sh "docker push shimul1402/currency-exchange-devops:${env.BUILD_ID}"
             }
           
         }
