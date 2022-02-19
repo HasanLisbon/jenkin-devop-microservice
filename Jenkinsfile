@@ -33,26 +33,26 @@ pipeline {
         }
         stage('Package') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                sh 'mvn package -DskipTests'
             }
         }
         stage('Build Docker Image'){
             steps{
                 //'docker build -t shimul1402/currency-exchange-devops:$env.BUILD_TAG'
                 script{
-                    dockerImage=docker.build("shimul1402/currency-exchange-devops:${env.BUILD_TAG}")
+                    dockerImage = docker.build('shimul1402/currency-exchange-devops:${env.BUILD_TAG}')
                 }
             }
         }
         stage('Docker Image Push'){
             steps{
                 script{
-                     dockerImage.withRegistry('', 'dockerhub'){
-                     dockerImage.push() 
-                     dockerImage.push('latest')
-                     }
-                    
+                    docker.withRegistry('', 'dockerhub'){
+                    docker.push()
+                    docker.push('latest')
                     }
+
+                }
             }
           
         }
