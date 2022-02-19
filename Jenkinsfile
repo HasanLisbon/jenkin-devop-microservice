@@ -40,7 +40,7 @@ pipeline {
             steps{
                 //'docker build -t shimul1402/currency-exchange-devops:$env.BUILD_TAG'
                 script{
-                    dockerImage = docker.build('shimul1402/currency-exchange-devops:${env.BUILD_TAG}')
+                    dockerImage = docker.build('shimul1402/currency-exchange-devops:${env.BUILD_ID}')
                 }
             }
         }
